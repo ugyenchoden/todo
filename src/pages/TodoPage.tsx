@@ -3,7 +3,7 @@ interface TodoPageProps {
 }
 
 const todoItems = [
-    { id: 1, title: 'Buy groceries', dueDate: '2024-06-10' },
+    { id: 1, title: 'Buy groceries', dueDate: new Date().toISOString().split('T')[0] },
     { id: 2, title: 'Walk the dog', dueDate: '2024-06-11' },
     { id: 3, title: 'Read a book', dueDate: '2024-06-15' },
 ];
@@ -22,7 +22,7 @@ function TodoPage({ filter }: TodoPageProps) {
         return dueDate >= today && dueDate <= weekFromNow;
     }
     return true; 
-});
+    });
 
     return(
         <>
