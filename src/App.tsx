@@ -1,6 +1,8 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import LiquidEther from "./LiquidEther";
 import SideBar from "./SideBar";
+import TodoPage from "./pages/TodoPage";
 
 function App() {
   return (
@@ -28,10 +30,17 @@ function App() {
 
       {/* Foreground */}
     <div style={{ display: "flex", minHeight: "100vh", margin: 0}}>
+      <Router>
         <SideBar />
         <main>
           <h1 className="content">TODO</h1>
+          <Routes>
+            <Route path="/" element={<TodoPage filter="all" />} />
+            <Route path="/today" element={<TodoPage filter="today" />} />
+            <Route path="/week" element={<TodoPage filter="week" />} /> 
+          </Routes>
         </main>
+        </Router>
       </div>
     </div>
   );
