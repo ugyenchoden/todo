@@ -24,3 +24,15 @@ html, body, #root, .app {
   color: white;
   padding: 2rem;
 }
+
+.priority-low{
+  border-left: 3px solid green;
+}
+
+.priority-medium {
+  border-left: 3px solid orange
+}
+
+.priority-high {
+  border-left: 3px solid red;
+}
