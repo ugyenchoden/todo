@@ -40,3 +40,13 @@ html, body, #root, .app {
 .text-strike{
   text-decoration: line-through;
 }
+
+.todo-item{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  cursor: pointer;
+  margin: 5px;
+  width: 100vh;
+}
