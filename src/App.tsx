@@ -32,17 +32,18 @@ function App() {
     <div style={{ display: "flex", minHeight: "100vh", margin: 0}}>
       <Router>
         <SideBar />
+        
         <main>
-          <h1 className="content">TODO</h1>
           <Routes>
             <Route path="/" element={<TodoPage filter="all" />} />
             <Route path="/today" element={<TodoPage filter="today" />} />
             <Route path="/week" element={<TodoPage filter="week" />} /> 
           </Routes>
         </main>
-        </Router>
-      </div>
+
+      </Router>
     </div>
+  </div>
   );
 }
 
