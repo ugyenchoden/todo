@@ -40,7 +40,7 @@ function TodoPage({ filter }: TodoPageProps) {
         <ul style={{listStyleType: 'none'}}>
             {filteredTodos.map(todo => (
                 <li key={todo.id} 
-                className={`priority-${todo.priority}`}
+                className={`priority-${todo.priority} ${todo.completed? 'text-strike': null }`}
                 style={{
                      display: 'flex',
                      alignItems: 'center',
@@ -57,7 +57,7 @@ function TodoPage({ filter }: TodoPageProps) {
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                 >
                      <input type="checkbox" checked={todo.completed}></input>
-                        {todo.title} - Due: {todo.dueDate}
+                     {todo.title} - Due: {todo.dueDate}
                 </li>
             ))}
         </ul>
