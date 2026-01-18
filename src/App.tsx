@@ -1,10 +1,25 @@
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import LiquidEther from "./LiquidEther";
 import SideBar from "./SideBar";
 import TodoPage from "./pages/TodoPage";
+import type { Todo } from "./types/Todo";
+
+const todoItems: Todo[] = [
+    { id: 1, title: 'Buy groceries', dueDate: new Date().toISOString().split('T')[0], completed: false, priority: 'low' },
+    { id: 2, title: 'Walk the dog', dueDate: '2024-06-11', completed: true, priority: 'medium' },
+    { id: 3, title: 'Read a book', dueDate: '2024-06-15', completed: true, priority: 'high' },
+    { id: 4, title: 'testing', dueDate: '2026-01-14', completed: false, priority: 'low' },
+    { id: 5, title: 'Read a book nnn', dueDate: '2026-06-19', completed: true, priority: 'high' },
+    { id: 6, title: 'testin nmm', dueDate: '2026-01-13', completed: false, priority: 'low' },
+    { id: 7, title: 'Buy groceries', dueDate: new Date().toISOString().split('T')[0], completed: false, priority: 'low' },
+];
+
 
 function App() {
+  const [todos, setTodos] = useState<Todo[]>(todoItems);
+
   return (
     <div className="app">
       {/* Background */}
@@ -35,9 +50,9 @@ function App() {
         
         <main>
           <Routes>
-            <Route path="/" element={<TodoPage filter="all" />} />
-            <Route path="/today" element={<TodoPage filter="today" />} />
-            <Route path="/week" element={<TodoPage filter="week" />} /> 
+            <Route path="/" element={<TodoPage filter="all" todoItems={todos} />} />
+            <Route path="/today" element={<TodoPage filter="today" todoItems={todos} />} />
+            <Route path="/week" element={<TodoPage filter="week" todoItems={todos} />} /> 
           </Routes>
         </main>
 

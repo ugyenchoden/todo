@@ -34,6 +34,9 @@ function SideBar() {
                 ))}
 
             </ul>
+            <button style={{ marginTop: '20px', padding: '10px', width: '100%', borderRadius: '4px', border: 'none', backgroundColor: '#5227FF', color: '#fff', cursor: 'pointer' }}>
+                + New Task
+            </button>
         </aside>
     </div>
   );

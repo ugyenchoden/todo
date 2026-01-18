@@ -1,38 +1,34 @@
+import type { Todo } from "../types/Todo";
+
 interface TodoPageProps {
     filter: 'all' | 'today' | 'week';
+    todoItems: Todo[]
 }
 
-const todoItems = [
-    { id: 1, title: 'Buy groceries', dueDate: new Date().toISOString().split('T')[0], completed: false, priority: 'low', category: 'general' },
-    { id: 2, title: 'Walk the dog', dueDate: '2024-06-11', completed: true, priority: 'medium', category: 'general' },
-    { id: 3, title: 'Read a book', dueDate: '2024-06-15', completed: true, priority: 'high', category: 'projects' },
-    { id: 4, title: 'testing', dueDate: '2026-01-14', completed: false, priority: 'low', category: 'projects' }
-];
-
-function TodoPage({ filter }: TodoPageProps) {
+function TodoPage({ filter, todoItems }: TodoPageProps) {
     const filteredTodos = todoItems.filter(todo => {
-    const today = new Date();
-    const dueDate = new Date(todo.dueDate);
-
-    if(filter === 'today') {    
-        return dueDate.toDateString() === today.toDateString();
-    } else if(filter === 'week') {
-        const dayOfWeek = today.getDay();
-        const numDay = today.getDate();
-
-        let startDate = new Date(today);
-        startDate.setDate(numDay- dayOfWeek);
-        startDate.setHours(0,0,0,0);
-
-        let endDate = new Date(today);
-        endDate.setDate(numDay + (7-dayOfWeek));
-        endDate.setHours(0,0,0,0);
+        if (!todo.dueDate) return false;
         
-        return startDate <= dueDate && dueDate <= endDate;
-    }
-    return true; 
-    });
+        const today = new Date();
+        const dueDate = new Date(todo.dueDate);
 
+        if(filter === 'today') {    
+            return dueDate.toDateString() === today.toDateString();
+        } else if(filter === 'week') {
+            const dayOfWeek = today.getDay();
+            const day = today.getDate();
+
+            const startDate = new Date(today);
+            startDate.setDate(day - (dayOfWeek === 0 ? 6 : dayOfWeek - 1)); // if Sunday, go back 6 days
+            startDate.setHours(0, 0, 0, 0);
+
+            let endDate = new Date(today);
+            endDate.setDate(startDate.getDate() + 6);
+            console.log( 'dueDate:', dueDate);
+            return startDate <= dueDate && dueDate <= endDate;
+        }
+        return true; 
+    });
     return(
     <>
         <h1 style={{paddingLeft: '40px'}}>{filter === "all" ? "Home" : filter === "today" ? "Today" : "Week"}</h1>
